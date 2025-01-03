@@ -1,5 +1,5 @@
 # HTTP Method Override Detection Tool
-简体中文 | [English](README.md)
+[简体中文](README.zh.md) | English
 
 ## 📖 Introduction
 A security tool focused on HTTP method override detection, using a progressive detection strategy to minimize impact on target systems. Designed based on [OWASP WSTG-CONF-06](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/06-Test_HTTP_Methods) testing guidelines for identifying and verifying HTTP method override vulnerabilities.
