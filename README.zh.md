@@ -1,48 +1,63 @@
-# HTTP 方法覆盖漏洞扫描器
+# HTTP 方法覆盖检测工具
+[English](README.md) | 简体中文
 
-中文 | [English](README.md) 
+## 📖 项目简介
+一款专注于 HTTP 方法覆盖检测的安全工具，采用渐进式探测策略，最大限度降低对目标系统的影响。
 
-## 项目简介
-HTTP 方法覆盖漏洞扫描器是一个用 Go 语言开发的安全工具，专门用于检测 Web 服务器中的 HTTP 方法覆盖（Method Override）漏洞。
+## ⚙️ 工作原理
+该工具采用三阶段检测策略：
 
-## 功能特点
-- 🔍 检测 OPTIONS 方法覆盖漏洞
-- 🕵️ 检测 TRACE 方法覆盖漏洞
-- 🚀 支持单 URL 和批量 URL 扫描
-- ⚙️ 可配置并发数和超时时间
-- 🎨 彩色控制台输出，便于阅读
+### 1️⃣ OPTIONS 可用性检测
+- 首先尝试 OPTIONS 方法获取服务器支持的 HTTP 方法列表
+- 如果 OPTIONS 方法不可用，转入方法覆盖测试
 
-## 安装方法
+### 2️⃣ 方法覆盖测试
+- 当 OPTIONS 不可用时，尝试通过方法覆盖的方式获取 OPTIONS 信息
+- 使用多种标准的 HTTP 方法覆盖请求头进行测试
+
+### 3️⃣ 安全性验证
+- 基于服务器返回的允许方法列表
+- 优先选择安全性高的方法进行覆盖测试
+- 避免使用具有破坏性的方法（如 DELETE）
+
+## 🚀 快速开始
+
+### 安装
 ```bash
-git clone https://github.com/yourusername/http_override.git
-cd http_override
+git clone https://github.com/yourusername/http-override.git
+cd http-override
 go build
 ```
 
-## 使用示例
-### 扫描单个 URL
+### 使用示例
 ```bash
+# 扫描单个目标
 ./http_override -u https://example.com
+
+# 批量扫描
+./http_override -l urls.txt -c 5 -t 10
 ```
 
-### 批量扫描 URL
-```bash
-./http_override -l urls.txt
-```
-
-## 参数说明
-| 参数 | 描述 | 默认值 |
+## 📝 命令行参数
+| 参数 | 说明 | 默认值 |
 |------|------|--------|
-| `-u` | 指定单个目标 URL | 无 |
-| `-l` | 指定包含 URL 列表的文件 | 无 |
-| `-c` | 设置并发数 | 5 |
-| `-t` | 设置超时时间（秒） | 10 |
+| `-u` | 指定单个目标 URL | - |
+| `-l` | 指定 URL 列表文件 | - |
+| `-c` | 并发数 | 5 |
+| `-t` | 超时时间(秒) | 10 |
 
-## 注意事项
-⚠️ 仅用于安全测试和研究，请确保获得授权后再对目标进行扫描
+## 🛠️ 支持的方法覆盖请求头
+- `X-HTTP-Method-Override`
+- `X-HTTP-Method`
+- `X-Method-Override`
+- `_method`
+- `X-Original-HTTP-Method`
+- `X-Override-Method`
 
-## 许可证
+## ⚠️ 注意事项
+1. 本工具采用渐进式探测策略，优先使用影响较小的检测方法
+2. 仅用于授权的安全测试，请勿用于未授权的测试活动
+3. 建议在测试环境中先进行验证
+
+## 📄 许可证
 [MIT License](LICENSE)
-
-## 贡献
-欢迎提交 Issue 和 Pull Request！
