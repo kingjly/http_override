@@ -1,48 +1,63 @@
-# HTTP Method Override Vulnerability Scanner
+# HTTP Method Override Detection Tool
+简体中文 | [English](README.md)
 
-[中文](README.zh.md) | English
+## 📖 Introduction
+A security tool focused on HTTP method override detection, using a progressive detection strategy to minimize impact on target systems. Designed based on [OWASP WSTG-CONF-06](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/06-Test_HTTP_Methods) testing guidelines for identifying and verifying HTTP method override vulnerabilities.
 
-## Project Overview
-HTTP Method Override Vulnerability Scanner is a security tool developed in Go, specifically designed to detect HTTP method override vulnerabilities in web servers.
+## ⚙️ Working Principle
+The tool employs a three-phase detection strategy:
 
-## Features
-- 🔍 Detect OPTIONS method override vulnerabilities
-- 🕵️ Detect TRACE method override vulnerabilities
-- 🚀 Support single URL and batch URL scanning
-- ⚙️ Configurable concurrency and timeout
-- 🎨 Colorful console output for easy reading
+### 1️⃣ OPTIONS Availability Detection
+- First attempts to use the OPTIONS method to obtain the server's supported HTTP methods
+- If OPTIONS is unavailable, proceeds to method override testing
 
-## Installation
+### 2️⃣ Method Override Testing
+- When OPTIONS is unavailable, attempts to obtain OPTIONS information through method override
+- Tests using multiple standard HTTP method override headers
+
+### 3️⃣ Security Verification
+- Based on the server's allowed methods list
+- Prioritizes safer methods for override testing
+- Avoids destructive methods (such as DELETE)
+
+## 🚀 Quick Start
+
+### Installation
 ```bash
-git clone https://github.com/yourusername/http_override.git
-cd http_override
+git clone https://github.com/yourusername/http-override.git
+cd http-override
 go build
 ```
 
-## Usage Examples
-### Scan a Single URL
+### Usage Examples
 ```bash
+# Scan single target
 ./http_override -u https://example.com
+
+# Batch scanning
+./http_override -l urls.txt -c 5 -t 10
 ```
 
-### Batch URL Scanning
-```bash
-./http_override -l urls.txt
-```
-
-## Parameter Description
+## 📝 Command Line Parameters
 | Parameter | Description | Default |
-|----------|-------------|---------|
-| `-u` | Specify a single target URL | None |
-| `-l` | Specify a file containing URL list | None |
-| `-c` | Set concurrency | 5 |
-| `-t` | Set timeout in seconds | 10 |
+|-----------|-------------|---------|
+| `-u` | Specify single target URL | - |
+| `-l` | Specify URL list file | - |
+| `-c` | Concurrency | 5 |
+| `-t` | Timeout (seconds) | 10 |
 
-## Precautions
-⚠️ For security testing and research only. Ensure authorization before scanning targets.
+## 🛠️ Supported Method Override Headers
+- `X-HTTP-Method-Override`
+- `X-HTTP-Method`
+- `X-Method-Override`
+- `_method`
+- `X-Original-HTTP-Method`
+- `X-Override-Method`
 
-## License
+## ⚠️ Precautions
+1. This tool uses a progressive detection strategy, prioritizing less impactful detection methods
+2. For authorized security testing only, do not use for unauthorized testing activities
+3. Recommended to verify in a test environment first
+
+## 📄 License
 [MIT License](LICENSE)
-
-## Contribution
-Issues and Pull Requests are welcome!
