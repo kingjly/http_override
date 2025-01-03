@@ -1,6 +1,6 @@
 # HTTP 方法覆盖漏洞扫描器
 
-中文|[English](README.md) 
+中文 | [English](README.md) 
 
 ## 项目简介
 HTTP 方法覆盖漏洞扫描器是一个用 Go 语言开发的安全工具，专门用于检测 Web 服务器中的 HTTP 方法覆盖（Method Override）漏洞。
