@@ -2,7 +2,7 @@
 [English](README.md) | 简体中文
 
 ## 📖 项目简介
-一款专注于 HTTP 方法覆盖检测的安全工具，采用渐进式探测策略，最大限度降低对目标系统的影响。
+一款专注于 HTTP 方法覆盖检测的安全工具，采用渐进式探测策略，最大限度降低对目标系统的影响。基于 [OWASP WSTG-CONF-06](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/06-Test_HTTP_Methods) 测试指南设计，用于识别和验证 HTTP 方法覆盖漏洞。
 
 ## ⚙️ 工作原理
 该工具采用三阶段检测策略：
