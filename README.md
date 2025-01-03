@@ -1,6 +1,6 @@
 # HTTP Method Override Vulnerability Scanner
 
-中文 | [English](README.md)
+[中文](README.zh.md) | English
 
 ## Project Overview
 HTTP Method Override Vulnerability Scanner is a security tool developed in Go, specifically designed to detect HTTP method override vulnerabilities in web servers.
