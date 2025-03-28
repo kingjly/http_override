@@ -24,7 +24,7 @@ The tool employs a three-phase detection strategy:
 
 ### Installation
 ```bash
-git clone https://github.com/yourusername/http-override.git
+git clone https://github.com/kingjly/http-override.git
 cd http-override
 go build
 ```
